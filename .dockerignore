@@ -1,0 +1,45 @@
+# Bytecode and compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.env/
+.venv/
+
+# Git + metadata
+.git/
+.gitignore
+
+# Docker config
+Dockerfile
+docker-compose.yml
+
+# OS / Editor files
+*.swp
+*.swo
+*.bak
+*~
+*.DS_Store
+
+# Tests, logs, and caches
+*.log
+*.pytest_cache/
+.coverage
+.pytest_cache/
+tests/
+coverage.xml
+
+# Jupyter Notebooks
+*.ipynb
+
+# Requirements lockfile (optional)
+poetry.lock
+Pipfile.lock
+
+# Custom files
+db/
+g42-chart/
+README.md

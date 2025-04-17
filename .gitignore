@@ -1,0 +1,58 @@
+# Bytecode files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+env/
+venv/
+.venv/
+.env/
+
+# Python packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Test output
+.coverage
+.tox/
+.nox/
+.pytest_cache/
+htmlcov/
+
+# Logs and databases
+*.log
+*.sqlite3
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Jupyter notebooks
+*.ipynb
+.ipynb_checkpoints/
+
+# Mac & Linux
+.DS_Store
+*.swp
+*.bak
+
+# Docker
+docker-compose.override.yml
+*.db
+*.pid
+
+# Secrets (only if not managed via secret manager)
+.env
+.env.*
+
+# pip
+pip-log.txt
+pip-delete-this-directory.txt
+
+# PyInstaller
+*.spec
