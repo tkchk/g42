@@ -97,7 +97,7 @@ kubectl create namespace g42
 Before using helm chart, replace `image-repo` with a reference to the image you've pushed inside of `values.yaml`.
 Or, as an option, you can use a pre-built image I made - just use `alexm8/g42` like this.
 ```
-sed -i 's/image-repo/alexm8\/g42/g' g42-population/values.yaml
+sed -i 's/image-repo/alexm8\/g42/g' g42-chart/values.yaml
 ```
 If your registry uses credentials, you also have to create a secret in kubernetes, so it can fetch the image from there. Also, the registry is required to use SSL, otherwise, kubernetes (specifically containerd) will refuse to download the image. The name `regcred` is hardcoded in the chart, so don't change it to something else.
 ```
