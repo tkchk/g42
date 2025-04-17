@@ -127,7 +127,7 @@ Just issue a helm upgrade command with install (-i) option.
 ```
 helm upgrade -i -n g42 g42-assignment g42-chart/ --values g42-population/values.yaml
 ```
-Just wait for pod to enter the Running state
+And wait for pod to enter the Running state. It's very small and should be up within seconds.
 ```
 kubectl get all
 NAME                                                 READY   STATUS    RESTARTS   AGE
