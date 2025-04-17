@@ -95,7 +95,7 @@ kubectl create namespace g42
 ```
 ## Preparing helm chart
 Before using helm chart, replace `image-repo` with a reference to the image you've pushed inside of `values.yaml`.
-Or, as an option, you can use a pre-built image I made - just use `alexm8/g42`.
+Or, as an option, you can use a pre-built image I made - just use `alexm8/g42` like this.
 ```
 sed -i 's/image-repo/alexm8\/g42/g' g42-population/values.yaml
 ```
@@ -125,7 +125,7 @@ Everything will be injected in the environment of running application's pod. Thi
 ## Deploying the application
 Just issue a helm upgrade command with install (-i) option.
 ```
-helm upgrade -i -n g42 g42-assignment g42-chart/ --values g42-population/values.yaml
+helm upgrade -i -n g42 g42-assignment g42-chart/ --values g42-chart/values.yaml
 ```
 And wait for pod to enter the Running state. It's very small and should be up within seconds.
 ```
