@@ -113,12 +113,12 @@ You can also use API key from elasticsearch. In such case, the application will 
 ```
 kubectl -n g42 create secret generic el-apikey --from-literal=ES_API_KEY=<your-api-key>
 ```
-You need to specify elasticsearch host at the helm's `values.yaml` level. Since it's not a sensitive information, you won't mess with kubernetes secrets here. Just look for elasticsearch key and replace the `host` value. Also, set 1 or 0 whether an application should trust elasticsearch's self signed certificate. It's represented as `ES_VERIFY_CERTS` variable inside of the application, and it's True by default. Since, we didn't tell elasticsearch to use a trusted certificate, let's disable this kind of check, or our application will fail.
+You need to specify elasticsearch host at the helm's `values.yaml` level. Since it's not a sensitive information, you won't mess with kubernetes secrets here. Just look for elasticsearch key and replace the `ES_HOST` value. Also, set 1 or 0 whether an application should trust elasticsearch's self signed certificate. It's represented as `ES_VERIFY_CERTS` variable inside of the application, and it's True by default. Since, we didn't tell elasticsearch to use a trusted certificate, let's disable this kind of check, or our application will fail.
 ```
 ...
 elasticsearch:
-  host: https://elasticsearch-master.elasticsearch.svc.cluster.local:9200
-  verifySSL: 0
+  ES_HOST: https://elasticsearch-master.elasticsearch.svc.cluster.local:9200
+  ES_VERIFY_CERTS: 0
 ...
 ```
 Everything will be injected in the environment of running application's pod. This is secure enough, but if we need more, there are plenty solutions for storing secrets in a centralised way.
