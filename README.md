@@ -127,6 +127,33 @@ Just issue a helm upgrade command with install (-i) option.
 ```
 helm upgrade -i -n g42 g42-assignment g42-chart/ --values g42-population/values.yaml
 ```
+Just wait for pod to enter the Running state
+```
+kubectl get all
+NAME                                                 READY   STATUS    RESTARTS   AGE
+pod/g42-assignment-g42-population-797f55c5fd-967rd   1/1     Running   0          157m
+
+NAME                                    TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
+service/g42-assignment-g42-population   ClusterIP   10.106.13.52   <none>        80/TCP    157m
+
+NAME                                            READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/g42-assignment-g42-population   1/1     1            1           157m
+
+NAME                                                       DESIRED   CURRENT   READY   AGE
+replicaset.apps/g42-assignment-g42-population-797f55c5fd   1         1         1       157m
+
+NAME                         DATA   AGE
+configmap/kube-root-ca.crt   1      37h
+
+NAME                                          TYPE                             DATA   AGE
+secret/el-password                            Opaque                           1      3h2m
+secret/el-user                                Opaque                           1      3h3m
+secret/regcred                                kubernetes.io/dockerconfigjson   1      3h13m
+secret/sh.helm.release.v1.g42-assignment.v1   helm.sh/release.v1               1      157m
+
+NAME                                                      CLASS   HOSTS       ADDRESS      PORTS   AGE
+ingress.networking.k8s.io/g42-assignment-g42-population   nginx   g42.local   10.0.0.251   80      157m
+```
 ## Accessing the application
 For an example, I've added an ingress to the helm chart with the hostname `g42.local` in `values.yml`
 ```
