@@ -16,7 +16,7 @@ persistentvolumeclaim/elasticsearch-master-elasticsearch-master-2   Bound    ela
 
 In order to import cities dataset from your PC, we're going to expose elasticsearch service on some random 30k+ port via NodePort type like this.
 ```
-kubectl -n elasticsearch patch svc elasticsearch-master -n elasticsearch -p '{"spec": {"type": "NodePort"}}'
+kubectl -n elasticsearch patch svc elasticsearch-master -p '{"spec": {"type": "NodePort"}}'
 kubectl get svc
 NAME                            TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                         AGE
 elasticsearch-master            NodePort    10.109.48.132   <none>        9200:30968/TCP,9300:32276/TCP   36h
@@ -70,7 +70,7 @@ You should recieve a giant output from elastic in JSON format with 201 status co
 ```
 After we've finished with the import, the service can (and should) be switched back to ClusterIP like this.
 ```
-kubectl -n elasticsearch patch svc elasticsearch-master -n elasticsearch -p '{"spec": {"type": "ClusterIP"}}'
+kubectl -n elasticsearch patch svc elasticsearch-master -p '{"spec": {"type": "ClusterIP"}}'
 ```
 ## Caveats
 1. We could have used some more specific elasticsearch import tools, but they require installing additional dependencies (npm for instance). Curl is much easier and compatible, although it may seem verbose.
