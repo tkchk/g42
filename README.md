@@ -76,16 +76,17 @@ kubectl -n elasticsearch patch svc elasticsearch-master -n elasticsearch -p '{"s
 1. We could have used some more specific elasticsearch import tools, but they require installing additional dependencies (npm for instance). Curl is much easier and compatible, although it may seem verbose.
 2. The actual data from elasticsearch is represented in JSON format, but the dump is modified so it can be compatible with elasticsearch's /_bulk API. It's not an exact JSON.
 3. Now we can use `elasticsearch-master.elasticsearch.svc.cluster.local` with port `9200` to access our elasticsearch installation from within our kubernetes cluster, and all the requests to it will be ballanced between pods.
+4. If you're using self-hosted kubernetes like i did, You should spread PVs for elastic cluster evenly between nodes. That way, pods will also spread evenly on the nodes of your cluster. This can be achieved by specifying `nodeAffinity` block in the PV manifest. And, that block should bind the PV to a specific node using node labels.
 
 # Deploying the app
 In order to build the application, docker is pretty much enough.
 ```
-docker build . -t registry.local/g42/assignment
+docker build . -t some-registry.local/g42/assignment
 ```
 The image itself must be pushed to some docker registry. If it requires login, do that before pushing.
 ```
-docker login registry.local
-docker push registry.local/g42/assignment
+docker login some-registry.local
+docker push some-registry.local/g42/assignment
 ```
 ## Creating the namespace
 As easy as it goes
@@ -94,8 +95,9 @@ kubectl create namespace g42
 ```
 ## Preparing helm chart
 Before using helm chart, replace `image-repo` with a reference to the image you've pushed inside of `values.yaml`.
+Or, as an option, you can use a pre-built image I made - just use `alexm8/g42`.
 ```
-sed -i 's/image-repo/registry.local\/g42\/assignment/g' g42-population/values.yaml
+sed -i 's/image-repo/alexm8\/g42/g' g42-population/values.yaml
 ```
 If your registry uses credentials, you also have to create a secret in kubernetes, so it can fetch the image from there. Also, the registry is required to use SSL, otherwise, kubernetes (specifically containerd) will refuse to download the image. The name `regcred` is hardcoded in the chart, so don't change it to something else.
 ```
