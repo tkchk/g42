@@ -113,7 +113,7 @@ def update_or_add_population():
         return jsonify({"error": "Request content-type must be application/json"}), 400
 
     data = request.get_json(silent=True)
-    if data is None:
+    if data is None or not isinstance(data, dict):
         return jsonify({"error": "Invalid JSON payload"}), 400
 
     city_name = data.get("city")
