@@ -109,7 +109,13 @@ def get_population():
 
 @app.route("/update", methods=["POST"])
 def update_or_add_population():
-    data = request.get_json()
+    if not request.is_json:
+        return jsonify({"error": "Request content-type must be application/json"}), 400
+
+    data = request.get_json(silent=True)
+    if data is None:
+        return jsonify({"error": "Invalid JSON payload"}), 400
+
     city_name = data.get("city")
     population = data.get("population")
     index = data.get("index", "cities")
